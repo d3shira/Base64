@@ -30,11 +30,36 @@ class Base64 {
     }
 
 
+public static String decode(String input) {
+        StringBuilder output = new StringBuilder();
+        byte[] bytes = new byte[input.length()];
+        int byteCount = 0;
 
+        for (int i = 0; i <= input.length(); i++) {
+            char c = input.charAt(i);
+            if (c == '=') {
+                break;
+            }
 
+            int value = BASE64_ALPHABET.indexOf(c);
+            if (value == -1) {
+                throw new IllegalArgumentException("Invalid character in input");
+            }
 
+            bytes[byteCount++] = (byte) value;
+        }
 
+        for (int i = 0; i < byteCount; i += 4) {
+            int b = ((bytes[i] & 0x3F) << 18) | ((bytes[i + 1] & 0x3F) << 12) | ((bytes[i + 2] & 0x3F) << 6) | (bytes[i + 3] & 0x3F);
+            output.append((char) ((b >> 16) & 0xFF));
+            if (bytes[i + 2] != 64 && byteCount - i > 3) {
+                output.append((char) ((b >> 8) & 0xFF));
+                if (bytes[i + 3] != 64 && byteCount - i > 4) {
+                    output.append((char) (b & 0xFF));
+                }
+            }
+        }
 
-
-
+        return output.toString();
+    }
 }
