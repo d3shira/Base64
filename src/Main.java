@@ -1,5 +1,15 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+        System.out.print("Write your message: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String encoded = Base64.encode(input);
+        String decoded = Base64.decode(encoded);
+        System.out.println("Input: " + input);
+        System.out.println("Encoded: " + encoded);
+        System.out.println("Decoded: " + decoded);
 
     }
 }
