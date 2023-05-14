@@ -29,7 +29,7 @@ class Base64 {
             output.append(BASE64_ALPHABET.charAt((b >> 18) & 0x3F));
             output.append(BASE64_ALPHABET.charAt((b >> 12) & 0x3F));
             output.append(BASE64_ALPHABET.charAt((b >> 6) & 0x3F));
-            output.append(BASE64_ALPHABET.charAt(b & 0x3F));
+              output.append(BASE64_ALPHABET.charAt(b & 0x3F));
         }
 
         for (int i = 0; i < paddingCount; i++) {
@@ -41,7 +41,7 @@ class Base64 {
 
 
 public static String decode(String input) {
-        StringBuilder output = new StringBuilder();
+    StringBuilder output = new StringBuilder();
         byte[] bytes = new byte[input.length()];
         int byteCount = 0;
 
